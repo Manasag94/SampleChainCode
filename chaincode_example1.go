@@ -38,12 +38,12 @@ func main() {
 // Init resets all the things
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	
-	var A, B, C string    // Entities
-	var Aval, Bval, Cval int // Values
+	var A, B string    // Entities
+	var Aval, Bval int // Values
 	var err error
 
-	if len(args) != 6 {
-		return nil, errors.New("Incorrect number of arguments. Expecting 6")
+	if len(args) != 4 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 4")
 	}
 
 	// Initialize the chaincode
@@ -57,13 +57,8 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	if err != nil {
 		return nil, errors.New("Expecting integer value for asset holding")
 	}
-	C = args[4]
-	Cval, err = strconv.Atoi(args[5])
-	if err != nil {
-		return nil, errors.New("Expecting integer value for asset holding")
-	}
-	
-	fmt.Println("Aval = %d, Bval = %d, Cval = %d\n", Aval, Bval, Cval)
+		
+	fmt.Println("Aval = %d, Bval = %dn", Aval, Bval)
 
 	// Write the state to the ledger
 	err = stub.PutState(A, []byte(strconv.Itoa(Aval)))
@@ -76,11 +71,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, err
 	}
 
-	err = stub.PutState(C, []byte(strconv.Itoa(Cval)))
-	if err != nil {
-		return nil, err
-	}
-
+	
 	return nil, nil
 }
 
