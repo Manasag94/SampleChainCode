@@ -38,7 +38,7 @@ func main() {
 // Init resets all the things
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	
-	var A, B ,C string    // Entities
+	var A, B, C string    // Entities
 	var Aval, Bval, Cval int // Values
 	var err error
 
